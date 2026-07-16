@@ -1,8 +1,0 @@
-COSAS QUE HACER
-- Poner imágenes a los proyectos
-- Definirlos un poco mejor
-- Cambiar focus (yo creo que data pipeline y eso no es lo que quiero)
-- Cambiar un poco la descripcion hablando de historia personal y la parte de "outside the code", que diga algo en plan que me gusta la geopolitica porq me gusta ver patrones comportamiento humano... esto ultimo que he puesto es un ejemplo pero pa que me entiendas
-- Revisar skills
-- Cambiar lo de "5 and counting" en projects
-- Cambiar mi entrada en lo que dice "focused"
