@@ -21,10 +21,14 @@
     --radius:16px;
     --shadow: 5px 5px 0 var(--ink);
     --shadow-sm: 3px 3px 0 var(--ink);
+    --nav-height: 78px;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  #sobre-mi, #habilidades, #proyectos, #contacto {
+  scroll-margin-top: var(--nav-height);
+  }
   body{
     margin:0;
     background:var(--paper);
@@ -442,6 +446,7 @@
           <span class="chip c2">SQL</span>
           <span class="chip c3">PySpark</span>
           <span class="chip c4">Hadoop / MapReduce</span>
+          <span class="chip c2">JavaScript</span>
         </div>
       </div>
 
@@ -465,11 +470,22 @@
       </div>
 
       <div class="skill-group">
+        <h3>Machine Learning</h3>
+        <div class="chip-row">
+          <span class="chip c3">Machine Learning</span>
+          <span class="chip c1">Scikit-learn</span>
+          <span class="chip c2">K-means / Clustering</span>
+        </div>
+      </div>
+      
+      <div class="skill-group">
         <h3>Other</h3>
         <div class="chip-row">
-          <span class="chip c4">GitHub</span>
           <span class="chip c3">n8n / automatización</span>
           <span class="chip c1">Docker</span>
+          <span class="chip c4">GitHub</span>
+          <span class="chip c1">REST APIs</span>
+          <span class="chip c3">Excel</span>
         </div>
       </div>
     </div>
@@ -536,7 +552,7 @@ const PROJECTS = [
     image: "",
     description: "Profiling and classification of European airports using structured EDA (KDD) and K-means on EUROCONTROL's APT-FLT dataset.",
     stack: ["Python", "K-means", "Pandas"],
-    link: "airportClustering.zip",
+    page: "clustering.html",
     code: "",
     languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}]
   },
@@ -548,7 +564,7 @@ const PROJECTS = [
     image: "",
     description: "Pipeline combining Swiss National Bank housing data and Valencian regional health data, visualized with MongoDB Charts.",
     stack: ["MongoDB Atlas", "Python", "Charts"],
-    link: "housing_health.ipynb",
+    page: "mongodb.html",
     code: "",
     languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}]
   },
@@ -560,7 +576,7 @@ const PROJECTS = [
     image: "", //(ruta a tu imagen, ej: "images/mapreduce.jpg". Déjalo vacío para usar el color)
     description: "Distributed processing exercises with Hadoop MapReduce on a custom Docker setup, practicing map/reduce patterns at scale.", //(el texto explicativo)
     stack: ["Python", "Hadoop", "Docker"], //(las píldoras pequeñas de tecnologías)
-    link: "mapReduce.zip", //ruta al archivo a descargar al pulsar "View project"
+    page: "mapreduce.html", //ruta al archivo a descargar al pulsar "View project"
     code: "", //ruta al archivo a descargar al pulsar "Code" (vacío = no se muestra el botón)
     languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}] //(iniciales de idioma, arriba a la derecha del título)
   },
@@ -572,7 +588,7 @@ const PROJECTS = [
     image: "",
     description: "Three PySpark programs run via spark-submit for large-scale local data transformation and analysis.",
     stack: ["PySpark", "Python", "Spark"],
-    link: "pySpark.zip",
+    page: "pyspark.html",
     code: "",
     languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}]
   },
@@ -584,7 +600,7 @@ const PROJECTS = [
     image: "",
     description: "A Swift tool that automatically extracts metadata (EXIF, GPS, ID3, codec info...) from images, audio and video files. Built with ImageIO and AVFoundation, including two real-world use cases — geolocation filtering for digital forensics and copyright detection for audio.",
     stack: ["Swift", "ImageIO", "AVFoundation", "Xcode"],
-    link: "tfg.pdf",
+    page: "tfg.html",
     code: "",
     languages: [{code:"ES", color:"var(--blue)"}]
   }
@@ -624,7 +640,8 @@ function renderProjects(list){
           ${p.stack.map(s => `<span class="stack-pill">${s}</span>`).join('')}
         </div>
         <div class="project-actions">
-          <a class="btn btn-sm btn-solid" href="${p.link}" download>View project</a>
+          <a class="btn btn-sm btn-solid" href="${p.page}">View project</a>
+          <a class="btn btn-sm" href="${p.download}" download>Download</a>
           ${p.code ? `<a class="btn btn-sm" href="${p.code}" download>Code</a>` : ''}
         </div>
       </div>
