@@ -277,7 +277,7 @@
     margin:0 auto;
   }
   .win-thumb{
-    height:150px;
+    height:280px;
     border-bottom:2px solid var(--ink);
     display:flex;align-items:center;justify-content:center;
     position:relative;overflow:hidden;
@@ -498,8 +498,6 @@
         <h2>Projects</h2>
         <span class="section-tag mono">// 5 and counting</span>
       </div>
-
-      <div class="filters" id="filters"></div>
       <div class="projects-grid" id="projects-grid"></div>
     </div>
   </section>
@@ -547,10 +545,8 @@ const PROJECTS = [
   {
     title: "Airport Clustering (EUROCONTROL)",
     file: "",
-    category: "Data Mining",
     thumbColor: "var(--coral)",
     image: "",
-    description: "Profiling and classification of European airports using structured EDA (KDD) and K-means on EUROCONTROL's APT-FLT dataset.",
     stack: ["Python", "K-means", "Pandas"],
     page: "clustering.html",
     code: "",
@@ -559,10 +555,8 @@ const PROJECTS = [
   {
     title: "Housing & Health — MongoDB Atlas",
     file: "",
-    category: "Databases",
     thumbColor: "var(--yellow)",
     image: "",
-    description: "Pipeline combining Swiss National Bank housing data and Valencian regional health data, visualized with MongoDB Charts.",
     stack: ["MongoDB Atlas", "Python", "Charts"],
     page: "mongodb.html",
     code: "",
@@ -571,10 +565,8 @@ const PROJECTS = [
   {
     title: "MapReduce on Hadoop", //(el nombre grande en negrita)
     file: "", //(nombre en la barra superior)
-    category: "Big Data", //(la etiqueta pequeña con borde)
     thumbColor: "var(--yellow)", //(color de fondo del recuadro)
     image: "", //(ruta a tu imagen, ej: "images/mapreduce.jpg". Déjalo vacío para usar el color)
-    description: "Distributed processing exercises with Hadoop MapReduce on a custom Docker setup, practicing map/reduce patterns at scale.", //(el texto explicativo)
     stack: ["Python", "Hadoop", "Docker"], //(las píldoras pequeñas de tecnologías)
     page: "mapreduce.html", //ruta al archivo a descargar al pulsar "View project"
     code: "", //ruta al archivo a descargar al pulsar "Code" (vacío = no se muestra el botón)
@@ -583,10 +575,8 @@ const PROJECTS = [
   {
     title: "PySpark Pipeline",
     file: "",
-    category: "Big Data",
     thumbColor: "var(--coral)",
     image: "",
-    description: "Three PySpark programs run via spark-submit for large-scale local data transformation and analysis.",
     stack: ["PySpark", "Python", "Spark"],
     page: "pyspark.html",
     code: "",
@@ -595,10 +585,8 @@ const PROJECTS = [
   {
     title: "Multimedia Metadata Extractor (Bachelor's Thesis)",
     file: "",
-    category: "Software Engineering",
     thumbColor: "var(--blue)",
     image: "",
-    description: "A Swift tool that automatically extracts metadata (EXIF, GPS, ID3, codec info...) from images, audio and video files. Built with ImageIO and AVFoundation, including two real-world use cases — geolocation filtering for digital forensics and copyright detection for audio.",
     stack: ["Swift", "ImageIO", "AVFoundation", "Xcode"],
     page: "tfg.html",
     code: "",
@@ -656,23 +644,6 @@ function renderProjects(list){
   `;
 }
 
-function renderFilters(){
-  const cats = ["All", ...new Set(PROJECTS.map(p => p.category))];
-  const box = document.getElementById('filters');
-  box.innerHTML = cats.map((c,i) =>
-    `<button class="filter-btn${i===0?' active':''}" data-cat="${c}">${c}</button>`
-  ).join('');
-  box.addEventListener('click', e => {
-    const btn = e.target.closest('.filter-btn');
-    if(!btn) return;
-    box.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const cat = btn.dataset.cat;
-    renderProjects(cat === "All" ? PROJECTS : PROJECTS.filter(p => p.category === cat));
-  });
-}
-
-renderFilters();
 renderProjects(PROJECTS);
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
