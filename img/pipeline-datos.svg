@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Imagen de portada pendiente">
+  <rect width="800" height="600" fill="#FFE6DB"/>
+  <g fill="none" stroke="#E45447" stroke-width="2" opacity="0.55">
+    <circle cx="400" cy="300" r="70"/>
+    <circle cx="400" cy="300" r="120"/>
+    <circle cx="400" cy="300" r="170"/>
+    <path d="M0 300 H800 M400 0 V600"/>
+  </g>
+  <rect x="330" y="230" width="140" height="140" fill="#E45447" opacity="0.9"/>
+  <text x="400" y="560" text-anchor="middle" font-family="Poppins, Roboto, sans-serif"
+        font-size="22" fill="#E45447" opacity="0.8">pipeline-datos</text>
+</svg>

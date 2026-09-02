@@ -1,652 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Javier Sarmiento — Portfolio</title>
-<meta name="description" content="Portfolio of computer science and data projects by Javier Sarmiento.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F7F4EC;
-    --paper-dot:#E3DECF;
-    --ink:#15130F;
-    --yellow:#F4C348;
-    --coral:#F27A5C;
-    --blue:#9FC6E8;
-    --white:#FFFFFF;
-    --grey:#5B564C;
-    --radius:16px;
-    --shadow: 5px 5px 0 var(--ink);
-    --shadow-sm: 3px 3px 0 var(--ink);
-    --nav-height: 85px;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Javier Sarmiento — Portfolio</title> <!--titulo de arriba del navegador-->
+  <meta name="description" content="Projects in data, machine learning and automation by Javier Sarmiento.">
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  #sobre-mi, #habilidades, #proyectos, #contacto {
-  scroll-margin-top: var(--nav-height);
-  }
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:700;
-    margin:0;
-    line-height:1.05;
-  }
-  .mono{font-family:'JetBrains Mono',monospace;}
-  a{color:inherit;text-decoration:none;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
 
-  /* dotted paper texture */
-  .dotted{
-    background-image: radial-gradient(var(--paper-dot) 1.5px, transparent 1.5px);
-    background-size: 18px 18px;
-  }
-
-  /* focus visibility */
-  a:focus-visible, button:focus-visible{
-    outline:3px solid var(--coral);
-    outline-offset:2px;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-  }
-
-  /* ---------- NAV ---------- */
-  header.site-nav{
-    position:sticky; top:0; z-index:50;
-    background:var(--paper);
-    border-bottom:2px solid var(--ink);
-  }
-  .nav-inner{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 24px;
-  }
-  .logo{
-    display:flex;align-items:center;gap:10px;
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;
-  }
-  .logo-mark{
-    width:36px;height:36px;border:2px solid var(--ink);border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    background:var(--yellow);
-    box-shadow:var(--shadow-sm);
-    font-family:'Space Grotesk',sans-serif;font-weight:700;
-  }
-  nav.links{display:flex;gap:28px;}
-  nav.links a{
-    font-weight:500;font-size:0.95rem;
-    padding:6px 2px;border-bottom:2px solid transparent;
-    transition:border-color .15s ease;
-  }
-  nav.links a:hover{border-color:var(--ink);}
-  .nav-cta{
-    display:flex;gap:12px;align-items:center;
-  }
-  .menu-toggle{display:none;}
-
-  @media (max-width:820px){
-    nav.links{display:none;}
-    .menu-toggle{
-      display:flex;width:40px;height:40px;border:2px solid var(--ink);border-radius:10px;
-      align-items:center;justify-content:center;background:var(--white);
-    }
-  }
-
-  /* ---------- BUTTONS ---------- */
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    border:2px solid var(--ink);
-    border-radius:12px;
-    padding:11px 20px;
-    font-weight:600;font-size:0.95rem;
-    background:var(--white);
-    box-shadow:var(--shadow-sm);
-    cursor:pointer;
-    transition:transform .12s ease, box-shadow .12s ease;
-  }
-  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
-  .btn:active{transform:translate(0,0);box-shadow:1px 1px 0 var(--ink);}
-  .btn-solid{background:var(--yellow);}
-  .btn-coral{background:var(--coral);color:var(--ink);}
-  .btn-sm{padding:8px 14px;font-size:0.85rem;border-radius:10px;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    padding:72px 0 56px;
-    border-bottom:2px solid var(--ink);
-  }
-  .hero-grid{
-    display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;
-  }
-  .eyebrow{
-    display:inline-block;
-    font-family:'JetBrains Mono',monospace;
-    font-size:0.8rem;font-weight:600;
-    background:var(--blue);
-    border:2px solid var(--ink);
-    border-radius:20px;
-    padding:5px 14px;
-    margin-bottom:18px;
-  }
-  .hero h1{font-size:3.6rem;}
-  .hero h1 .accent{
-    background:var(--yellow);
-    padding:0 10px;border:2px solid var(--ink);border-radius:10px;
-    display:inline-block;
-  }
-  .hero p.lead{
-    font-size:1.1rem;color:var(--grey);max-width:46ch;margin:20px 0 28px;
-  }
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
-
-  .hero-art{
-    border:2px solid var(--ink);
-    border-radius:20px;
-    background:var(--white);
-    box-shadow:8px 8px 0 var(--ink);
-    aspect-ratio:1/1;
-    display:flex;align-items:center;justify-content:center;
-    padding:20px;
-  }
-
-  @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;}
-    .hero h1{font-size:2.6rem;}
-    .hero-art{order:-1;max-width:340px;margin:0 auto;}
-  }
-
-  /* ---------- QUICK LINKS BAR ---------- */
-  .quicklinks{
-    border-bottom:2px solid var(--ink);
-  }
-  .quicklinks-row{
-    display:grid;grid-template-columns:repeat(4,1fr);
-  }
-  .quicklinks-row a{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:20px 24px;
-    border-right:2px solid var(--ink);
-    font-weight:600;
-    transition:background .15s ease;
-  }
-  .quicklinks-row a:last-child{border-right:none;}
-  .quicklinks-row a:hover{background:var(--yellow);}
-  @media (max-width:700px){
-    .quicklinks-row{grid-template-columns:repeat(2,1fr);}
-    .quicklinks-row a:nth-child(2){border-right:none;}
-    .quicklinks-row a:nth-child(1),.quicklinks-row a:nth-child(2){border-bottom:2px solid var(--ink);}
-  }
-
-  /* ---------- SECTION HEADS ---------- */
-  section{padding:64px 0;}
-  .section-head{
-    display:flex;align-items:baseline;justify-content:space-between;
-    margin-bottom:36px;flex-wrap:wrap;gap:12px;
-  }
-  .section-head h2{font-size:2.2rem;}
-  .section-tag{
-    font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--grey);
-  }
-
-  /* ---------- ABOUT ---------- */
-  .about{border-bottom:2px solid var(--ink);}
-  .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start;}
-  .about p{font-size:1.05rem;line-height:1.7;color:var(--ink);}
-  .about p + p{margin-top:16px;}
-  .info-card{
-    border:2px solid var(--ink);border-radius:16px;overflow:hidden;
-    box-shadow:var(--shadow);background:var(--white);
-  }
-  .info-card-head{
-    background:var(--coral);
-    border-bottom:2px solid var(--ink);
-    padding:12px 18px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.85rem;
-  }
-  .info-card dl{margin:0;padding:6px 0;}
-  .info-card .row{
-    display:flex;justify-content:space-between;gap:12px;
-    padding:12px 18px;border-bottom:1px solid var(--paper-dot);
-    font-size:0.92rem;
-  }
-  .info-card .row:last-child{border-bottom:none;}
-  .info-card dt{color:var(--grey);font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
-  .info-card dd{margin:0;font-weight:600;text-align:right;}
-
-  @media (max-width:820px){.about-grid{grid-template-columns:1fr;}}
-
-  /* ---------- SKILLS ---------- */
-  .skills{border-bottom:2px solid var(--ink);}
-  .skill-group{margin-bottom:26px;}
-  .skill-group h3{
-    font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:600;
-    color:var(--grey);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;
-  }
-  .chip-row{display:flex;flex-wrap:wrap;gap:10px;}
-  .chip{
-    border:2px solid var(--ink);border-radius:10px;
-    padding:8px 14px;font-size:0.88rem;font-weight:600;
-    box-shadow:var(--shadow-sm);
-  }
-  .chip.c1{background:var(--yellow);}
-  .chip.c2{background:var(--coral);}
-  .chip.c3{background:var(--blue);}
-  .chip.c4{background:var(--white);}
-
-  /* ---------- PROJECTS ---------- */
-  .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
-  .filter-btn{
-    border:2px solid var(--ink);border-radius:20px;
-    padding:8px 16px;font-size:0.85rem;font-family:'JetBrains Mono',monospace;font-weight:600;
-    background:var(--white);cursor:pointer;
-  }
-  .filter-btn.active{background:var(--ink);color:var(--paper);}
-
-  .projects-grid{
-    display:grid;grid-template-columns:repeat(2,1fr);gap:28px;
-  }
-  @media (max-width:800px){.projects-grid{grid-template-columns:1fr;}}
-
-  .project-card{
-    border:2px solid var(--ink);border-radius:16px;overflow:hidden;
-    background:var(--white);
-    box-shadow:var(--shadow);
-    display:flex;flex-direction:column;
-  }
-  .win-bar{
-    display:flex;align-items:center;gap:8px;
-    padding:10px 14px;
-    border-bottom:2px solid var(--ink);
-    background:var(--paper);
-  }
-  .win-dots{display:flex;gap:5px;}
-  .win-dots span{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink);}
-  .win-file{
-    font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--grey);
-    margin:0 auto;
-  }
-  .win-thumb{
-    height:280px;
-    border-bottom:2px solid var(--ink);
-    display:flex;align-items:center;justify-content:center;
-    position:relative;overflow:hidden;
-  }
-  .win-thumb svg{width:100%;height:100%;}
-  .win-thumb-img{width:100%;height:100%;object-fit:cover;}
-  .project-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:12px;flex:1;}
-  .project-tag{
-    align-self:flex-start;
-    font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;
-    border:2px solid var(--ink);border-radius:20px;padding:3px 10px;
-  }
-  .project-card h3{font-size:1.2rem;}
-  .title-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
-  .lang-row{display:flex;gap:6px;flex-shrink:0;}
-  .lang-pill{
-    font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;
-    border:1.5px solid var(--ink);border-radius:8px;padding:3px 8px;
-  }
-  .project-card p{font-size:0.92rem;color:var(--grey);line-height:1.55;margin:0;}
-  .stack-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
-  .stack-pill{
-    font-family:'JetBrains Mono',monospace;font-size:0.72rem;
-    border:1.5px solid var(--ink);border-radius:8px;padding:3px 8px;background:var(--paper);
-  }
-  .project-actions{display:flex;gap:10px;margin-top:auto;padding-top:6px;}
-
-  .project-card.ghost{
-    border-style:dashed;
-    box-shadow:none;
-    display:flex;align-items:center;justify-content:center;
-    text-align:center;
-    padding:40px 24px;
-    color:var(--grey);
-    min-height:280px;
-  }
-  .project-card.ghost h3{color:var(--ink);margin-bottom:8px;}
-
-  /* ---------- CONTACT ---------- */
-  .contact{
-    background:var(--ink);color:var(--paper);
-  }
-  .contact .section-head h2{color:var(--paper);}
-  .contact .section-tag{color:#B9B4A6;}
-  .contact p.lead{color:#CFCABC;max-width:52ch;margin:0 0 28px;font-size:1.05rem;}
-  .contact-actions{display:flex;gap:14px;flex-wrap:wrap;}
-  .contact .btn{box-shadow:5px 5px 0 var(--paper-dot);}
-  .contact .btn:hover{box-shadow:6px 6px 0 var(--paper-dot);}
-
-  footer{
-    padding:24px 0;background:var(--ink);color:#8f8a7c;
-    border-top:2px solid #3a362c;
-    font-family:'JetBrains Mono',monospace;font-size:0.8rem;
-  }
-  .footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<header class="site-nav">
-  <div class="wrap nav-inner">
-    <a href="#top" class="logo">
-      <span class="logo-mark">JS</span>
-      Javier Sarmiento
-    </a>
-    <nav class="links">
-      <a href="#sobre-mi">About</a>
-      <a href="#habilidades">Skills</a>
-      <a href="#proyectos">Projects</a>
-    </nav>
-    <div class="nav-cta">
-      <a class="btn btn-solid btn-sm" href="#contacto">Contact</a>
+  <!-- ===== Header ===== -->
+  <header class="header_area">
+    <div class="main_menu">
+      <nav class="container navbar">
+        <a class="navbar-brand" href="index.html">Javier<span>.</span></a>
+
+        <ul class="menu_nav"> <!--barra navegacion-->
+          <li class="nav-item active"><a class="nav-link" href="#work">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#abt-me">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact-me">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path>
+            </svg>
+          </button>
+
+          <button class="navbar-toggler" type="button" aria-label="Open menu" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+      </nav>
     </div>
-  </div>
-</header>
+  </header>
 
-<main id="top">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow mono">Grüezi 👋</span>
-        <h1>Hi.<br>I'm <span class="accent">Javier</span>.</h1>
-        <p class="lead">Computer Engineer with a focus on data analysis: finding the patterns that matter and turning them into strategy. Currently completing an MSc in Big Data & Data Science, based in Switzerland since last year.</p>
-        <div class="hero-actions">
-          <a class="btn btn-solid" href="#proyectos">View projects ↓</a>
-          <a class="btn" href="JavierSarmiento_CV_ch.pdf" id="cv-link" download>Download CV</a>
-        </div>
-      </div>
-      <div class="hero-art">
-        <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="256" cy="54" r="10" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2"/>
-          <circle cx="284" cy="86" r="5" fill="var(--white)" stroke="var(--ink)" stroke-width="2"/>
-          <rect x="34" y="70" width="200" height="150" rx="14" fill="var(--white)" stroke="var(--ink)" stroke-width="3"/>
-          <rect x="34" y="70" width="200" height="30" rx="14" fill="var(--blue)" stroke="var(--ink)" stroke-width="3"/>
-          <circle cx="50" cy="85" r="4" fill="var(--ink)"/>
-          <circle cx="64" cy="85" r="4" fill="var(--ink)"/>
-          <circle cx="78" cy="85" r="4" fill="var(--ink)"/>
-          <text x="55" y="145" font-family="JetBrains Mono, monospace" font-size="26" fill="var(--ink)" font-weight="700">&lt;/&gt;</text>
-          <rect x="55" y="160" width="120" height="10" rx="5" fill="var(--coral)" stroke="var(--ink)" stroke-width="2"/>
-          <rect x="55" y="180" width="80" height="10" rx="5" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2"/>
-          <rect x="118" y="220" width="30" height="16" fill="var(--white)" stroke="var(--ink)" stroke-width="3"/>
-          <rect x="96" y="236" width="74" height="12" rx="4" fill="var(--white)" stroke="var(--ink)" stroke-width="3"/>
-          <g>
-            <rect x="220" y="150" width="70" height="90" rx="10" fill="var(--yellow)" stroke="var(--ink)" stroke-width="3"/>
-            <circle cx="255" cy="180" r="14" fill="var(--white)" stroke="var(--ink)" stroke-width="2.5"/>
-            <path d="M248 180a7 7 0 1 1 14 0" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <rect x="232" y="205" width="46" height="8" rx="4" fill="var(--white)" stroke="var(--ink)" stroke-width="2"/>
-            <rect x="232" y="218" width="30" height="8" rx="4" fill="var(--white)" stroke="var(--ink)" stroke-width="2"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
+  <section class="section_gap" id="work">
+    <div class="container">
 
-  <!-- QUICK LINKS -->
-  <div class="quicklinks dotted">
-    <div class="quicklinks-row">
-      <a href="#sobre-mi">About <span>↗</span></a>
-      <a href="#habilidades">Skills <span>↗</span></a>
-      <a href="#proyectos">Projects <span>↗</span></a>
-      <a href="#contacto">Contact <span>↗</span></a>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <section class="about" id="sobre-mi">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>About</h2>
-        <span class="section-tag mono">// profile</span>
-      </div>
-      <div class="about-grid">
-        <div>
-          <p>Computer Engineering graduate, currently completing a Master's in Big Data & Data Science while working two part-time jobs in Switzerland. I've never been drawn to the data itself, what actually gets me interested is what's underneath it: the patterns, the "why", and what it can be used for. I'd rather spend longer understanding why something works than settle for the first answer that does.</p>
-          <p>I moved to Switzerland a year ago without speaking a word of German, and today I work customer-facing in it, probably the clearest proof I have that starting from zero doesn't scare me if it's worth it. Outside work and study, I follow aviation, geography and geopolitics closely, and I'm usually the one who asks one question too many until something actually clicks.</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-head mono">profile.json</div>
-          <dl>
-            <div class="row"><dt>location</dt><dd>Switzerland 🇨🇭</dd></div>
-            <div class="row"><dt>education</dt><dd>MSc Big Data &amp; DS — VIU</dd></div>
-            <div class="row"><dt>background</dt><dd>Computer Engineering</dd></div>
-            <div class="row"><dt>experience</dt><dd>Deloitte · Data Analyst</dd></div>
-            <div class="row"><dt>focus</dt><dd>Data analysis &amp; insight generation</dd></div>
-            <div class="row"><dt>languages</dt><dd>EN · ES · DE (learning)</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section class="skills" id="habilidades">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Skills</h2>
-        <span class="section-tag mono">// stack</span>
+      <div class="main-title">
+        <h1>Javier Sarmiento Sanjuán</h1>
+        <p> <!--introduccion-->
+          I'm a computer engineer who found his way into data and stayed there.
+          Curiosity is what got me here, and it's what keeps me picking up
+          something new with every project. What follows is what I've built
+          along the way, and the thinking behind each piece.
+        </p>
       </div>
 
-      <div class="skill-group">
-        <h3>Languages &amp; processing</h3>
-        <div class="chip-row">
-          <span class="chip c1">Python</span>
-          <span class="chip c2">SQL</span>
-          <span class="chip c3">PySpark</span>
-          <span class="chip c4">Hadoop / MapReduce</span>
-          <span class="chip c2">JavaScript</span>
-        </div>
-      </div>
+      <!--
+        PROYECTOS
+      -->
+      <div class="projects_grid">
+        <!--plantilla para nuevos proyectos
+        <a class="project_card" href="##"> nombre html
+          <div class="project_cover">
+            <img src="##" style="object-position: center 85%;"> src: nombre imagen || style: para ajustarla
+          </div>
+          <div class="project_body">
+            <h3>titulo</h3>
+            <p>resumen</p>
+            <div class="project_meta">caracteristicas | anno | idiomas</div>
+          </div>
+        </a>
+        -->
+        <a class="project_card" href="proyectos/6airportClustering.html">
+          <div class="project_cover">
+            <img src="img/airportClusteringPortada.webp" style="object-position: center 85%;">
+          </div>
+          <div class="project_body">
+            <h3>European Airport Traffic Classification</h3>
+            <p>Using EUROCONTROL data to classify European airports by their traffic patterns and usage profile.</p>
+            <div class="project_meta">Python, Pandas | 2026 | ES, EN</div>
+          </div>
+        </a>
 
-      <div class="skill-group">
-        <h3>Databases</h3>
-        <div class="chip-row">
-          <span class="chip c3">MongoDB Atlas</span>
-          <span class="chip c1">Apache Cassandra</span>
-          <span class="chip c4">BigQuery</span>
-          <span class="chip c2">Snowflake</span>
-        </div>
-      </div>
+        <a class="project_card" href="proyectos/5housingHealth.html">
+          <div class="project_cover">
+            <img src="./img/housingHealthPortada.png" style="object-position: center 90%;">
+          </div>
+          <div class="project_body">
+            <h3>Open Data ETL Pipeline for Surgical Waiting List</h3>
+            <p>Normalizing surgical waiting data with MongoDB and API automation to reveal healthcare system bottlenecks.</p>
+            <div class="project_meta">Python, Pandas, MongoDB | 2026 | ES, EN</div>
+          </div>
+        </a>
 
-      <div class="skill-group">
-        <h3>BI &amp; visualization</h3>
-        <div class="chip-row">
-          <span class="chip c2">Tableau</span>
-          <span class="chip c1">Power BI</span>
-          <span class="chip c4">MongoDB Charts</span>
-        </div>
-      </div>
+        <a class="project_card" href="proyectos/4mapReduce.html">
+          <div class="project_cover">
+            <img src="img/pipeline-datos.svg">
+          </div>
+          <div class="project_body">
+            <h3>Data Pipeline with PySpark</h3>
+            <p>Short description of the project: the problem it solved and what you built.</p>
+            <div class="project_meta">PySpark · BigQuery</div>
+          </div>
+        </a>
 
-      <div class="skill-group">
-        <h3>Machine Learning</h3>
-        <div class="chip-row">
-          <span class="chip c3">Machine Learning</span>
-          <span class="chip c1">Scikit-learn</span>
-          <span class="chip c2">K-means / Clustering</span>
-        </div>
-      </div>
-      
-      <div class="skill-group">
-        <h3>Other</h3>
-        <div class="chip-row">
-          <span class="chip c3">n8n / automatización</span>
-          <span class="chip c1">Docker</span>
-          <span class="chip c4">GitHub</span>
-          <span class="chip c1">REST APIs</span>
-          <span class="chip c3">Excel</span>
-        </div>
+        <a class="project_card" href="proyectos/3pySpark.html">
+          <div class="project_cover">
+            <img src="img/dashboard-ventas.svg">
+          </div>
+          <div class="project_body">
+            <h3>Sales Analytics Dashboard</h3>
+            <p>Short description of the project: the problem it solved and what you built.</p>
+            <div class="project_meta">Power BI · SQL</div>
+          </div>
+        </a>
+
+        <a class="project_card" href="proyectos/2tfg.html">
+          <div class="project_cover">
+            <img src="img/tfm-big-data.svg" alt="Cover image for the master's thesis project">
+          </div>
+          <div class="project_body">
+            <h3>Bachelor's Thesis</h3>
+            <p>Short description of the project: the problem it solved and what you built.</p>
+            <div class="project_meta">VIU · 2026</div>
+          </div>
+        </a>
+<!--
+        <a class="project_card" href="proyectos/1metech.html">
+          <div class="project_cover">
+            <img src="img/app-swift.svg" alt="Cover image for the Swift mobile app project">
+          </div>
+          <div class="project_body">
+            <h3>Mobile App in Swift</h3>
+            <p>Short description of the project: the problem it solved and what you built.</p>
+            <div class="project_meta">Swift · iOS</div>
+          </div>
+        </a>
+-->
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="proyectos" id="proyectos">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <span class="section-tag mono">// 5 and counting</span>
+  <!-- ===== About ===== -->
+  <section class="section_gap gray-bg" id="abt-me">
+    <div class="container">
+      <div class="about_inner">
+
+        <!-- left column: photo, with the skill groups underneath -->
+        <div class="about-left">
+          <img src="img/profile.svg" alt="Portrait of Javier Sarmiento"> <!--foto personal-->
+
+          <!--skills-->
+          <div class="about_skills">
+            <div class="skill_group">
+              <h4>Languages &amp; processing</h4>
+              <ul>
+                <li>Python</li>
+                <li>SQL</li>
+                <li>PySpark</li>
+                <li>Hadoop</li>
+                <li>Swift</li>
+              </ul>
+            </div>
+
+            <div class="skill_group">
+              <h4>Databases</h4>
+              <ul>
+                <li>BigQuery</li>
+                <li>Snowflake</li>
+                <li>MongoDB Atlas</li>
+                <li>Apache Cassandra</li>
+              </ul>
+            </div>
+
+            <div class="skill_group">
+              <h4>BI &amp; visualization</h4>
+              <ul>
+                <li>Power BI</li>
+                <li>Tableau</li>
+              </ul>
+            </div>
+
+            <div class="skill_group">
+              <h4>Other</h4>
+              <ul>
+                <li>PyTorch</li>
+                <li>Jupyter</li>
+                <li>Git &amp; GitHub</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- right column: the three paragraphs -->
+        <div class="about-right">
+          <div class="main-title text-left">
+            <h1>About me</h1>
+          </div>
+            <!--sobre mi-->
+          <p>
+            I studied Computer Engineering and I'm finishing an MSc in Big Data
+            and Data Science at VIU. In between I worked as a data analyst at
+            Deloitte Spain, mostly in Python and SQL, and ran a freelance project
+            building AI-driven customer service systems for small businesses.
+            Before that came internships in frontend development and hardware,
+            which is where I figured out what I wanted to do.
+          </p>
+
+          <p>
+            I've moved around a fair amount: León, Salamanca and Madrid, an
+            exchange year in Mexico, some summers in Dublin and now Switzerland.
+            Every move meant starting over with a new city and new people, and
+            this one added a new language on top. I'm learning German from
+            scratch, which is humbling in a way that code rarely is.
+          </p>
+
+          <p>
+            Away from a screen I run and train outdoors. I follow aviation,
+            geography and geopolitics closely, and I keep an eye on the markets.
+            I also love to travel and I document what I see, it sharpens observation
+            skills that transfer directly into data work. The common thread, if
+            there is one, is that I'd rather understand how something works than
+            just use it.
+          </p>
+        </div>
+
       </div>
-      <div class="projects-grid" id="projects-grid"></div>
     </div>
   </section>
 
-</main>
+  <!-- ===== Contact ===== -->
+  <footer class="section_gap footer_area" id="contact-me">
+    <div class="container">
+      <aside class="social_widget">
+        <h4>Let's talk</h4>
+        <p class="footer_lead"> <!--frase final-->
+          I'm interested in problems where the hard part is figuring out what
+          the data actually says. If that sounds like your world, reach out.
+        </p>
 
-<!-- CONTACT -->
-<section class="contact" id="contacto">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Let's talk</h2>
-      <span class="section-tag mono">// contact</span>
+        <ul class="list">
+          <!-- LinkedIn -->
+          <li>
+            <a href="https://www.linkedin.com/in/javier-sarmiento-sanju%C3%A1n-60483727b/" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path>
+                <path d="M2.9 9.75h4.2v11.1H2.9z"></path>
+                <path d="M9.75 9.75h4.02v1.52h.06a4.42 4.42 0 0 1 3.96-2.05c4.23 0 5.01 2.66 5.01 6.12v5.51h-4.19v-4.89c0-1.17-.02-2.67-1.66-2.67-1.66 0-1.92 1.27-1.92 2.59v4.97H9.75z"></path>
+              </svg>
+            </a>
+          </li>
+
+          <!-- Email -->
+          <li>
+            <a href="mailto:javiersarmientosj@gmail.com" aria-label="Send me an email" title="Email">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M2.4 5.9c0-.9.7-1.6 1.6-1.6h16c.9 0 1.6.7 1.6 1.6v.3L12 12.3 2.4 6.2z"></path>
+                <path d="M2.4 8.4v9.7c0 .9.7 1.6 1.6 1.6h16c.9 0 1.6-.7 1.6-1.6V8.4l-9.1 5.8a1 1 0 0 1-1.1 0z"></path>
+              </svg>
+            </a>
+          </li>
+
+          <!-- CV download -->
+          <li>
+            <a href="info/JavierSarmiento_CV_ch.pdf" download aria-label="Download my CV" title="Download CV">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M11 3h2v8.3l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 11.3z"></path>
+                <path d="M4 15.5h2v3.1h12v-3.1h2v4.1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <div class="copyright">
+        <p>© 2026 Javier Sarmiento Sanjuán</p>
+      </div>
     </div>
-    <p class="lead">If you'd like to talk data, discuss a project, or just say hi — feel free to reach out.</p>
-    <div class="contact-actions">
-      <a class="btn btn-solid" href="mailto:javiersarmientosj@gmail.com">✉ Email me</a>
-      <a class="btn btn-coral" href="https://linkedin.com/in/javier-sarmiento-sanjuán-60483727b/" target="_blank" rel="noopener">LinkedIn ↗</a>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <div class="wrap footer-row">
-    <span>© <span id="year"></span> Javier Sarmiento</span>
-    <span>Gmacht mit Liebe zum Detail 🇨🇭</span>
-  </div>
-</footer>
-
-<script>
-/* =========================================================
-   PROJECTS — add yours here. Each object is one card.
-   category: used for the filter buttons
-   file: "filename.ext" text shown in the top bar of the card
-   thumbColor: thumbnail background color (var(--yellow) | var(--coral) | var(--blue))
-   image: (optional) path to a thumbnail image, e.g. "images/mi-proyecto.jpg".
-          If set, it replaces the colored thumbColor placeholder.
-   link: path to the actual file to download, e.g. "files/mi-proyecto.zip".
-          Clicking the button downloads that file instead of opening a page.
-   code: (optional) same as link, but for the "Code" button. Leave it as ""
-          to hide the "Code" button on that project card.
-   languages: colored initials shown top-right of the title, one per spoken
-          language used in the project (e.g. [{code:"EN",color:"var(--blue)"}]).
-   ========================================================= */
-const PROJECTS = [
-  {
-    title: "Airport Clustering (EUROCONTROL)",
-    file: "",
-    thumbColor: "var(--coral)",
-    image: "",
-    stack: ["Python", "K-means", "Pandas"],
-    page: "clustering.html",
-    code: "",
-    languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}]
-  },
-  {
-    title: "Housing & Health — MongoDB Atlas",
-    file: "",
-    thumbColor: "var(--yellow)",
-    image: "",
-    stack: ["MongoDB Atlas", "Python", "Charts"],
-    page: "mongodb.html",
-    code: "",
-    languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}]
-  },
-  {
-    title: "MapReduce on Hadoop", //(el nombre grande en negrita)
-    file: "", //(nombre en la barra superior)
-    thumbColor: "var(--yellow)", //(color de fondo del recuadro)
-    image: "", //(ruta a tu imagen, ej: "images/mapreduce.jpg". Déjalo vacío para usar el color)
-    stack: ["Python", "Hadoop", "Docker"], //(las píldoras pequeñas de tecnologías)
-    page: "mapreduce.html", //ruta al archivo a descargar al pulsar "View project"
-    code: "", //ruta al archivo a descargar al pulsar "Code" (vacío = no se muestra el botón)
-    languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}] //(iniciales de idioma, arriba a la derecha del título)
-  },
-  {
-    title: "PySpark Pipeline",
-    file: "",
-    thumbColor: "var(--coral)",
-    image: "",
-    stack: ["PySpark", "Python", "Spark"],
-    page: "pyspark.html",
-    code: "",
-    languages: [{code:"EN", color:"var(--blue)"}, {code:"ES", color:"var(--blue)"}]
-  },
-  {
-    title: "Multimedia Metadata Extractor (Bachelor's Thesis)",
-    file: "",
-    thumbColor: "var(--blue)",
-    image: "",
-    stack: ["Swift", "ImageIO", "AVFoundation", "Xcode"],
-    page: "tfg.html",
-    code: "",
-    languages: [{code:"ES", color:"var(--blue)"}]
-  }
-
-];
-
-function thumbSvg(color){
-  return `<svg viewBox="0 0 300 150" preserveAspectRatio="none">
-    <rect width="300" height="150" fill="${color}"/>
-    <circle cx="40" cy="115" r="30" fill="none" stroke="var(--ink)" stroke-width="2" opacity=".5"/>
-    <rect x="90" y="30" width="180" height="10" fill="var(--ink)" opacity=".85"/>
-    <rect x="90" y="52" width="130" height="10" fill="var(--ink)" opacity=".55"/>
-    <rect x="90" y="74" width="150" height="10" fill="var(--ink)" opacity=".7"/>
-    <circle cx="250" cy="40" r="14" fill="none" stroke="var(--ink)" stroke-width="2" opacity=".6"/>
-  </svg>`;
-}
-
-function renderProjects(list){
-  const grid = document.getElementById('projects-grid');
-  grid.innerHTML = list.map(p => `
-    <article class="project-card">
-      <div class="win-bar">
-        <div class="win-dots"><span></span><span></span><span></span></div>
-        <span class="win-file mono">${p.file}</span>
-      </div>
-      <div class="win-thumb" style="background:${p.thumbColor}">
-        ${p.image ? `<img src="${p.image}" alt="${p.title}" class="win-thumb-img">` : thumbSvg(p.thumbColor)}
-      </div>
-      <div class="project-body">
-        <span class="project-tag mono">${p.category}</span>
-        <div class="title-row">
-          <h3>${p.title}</h3>
-          <span class="lang-row">${(p.languages||[]).map(l => `<span class="lang-pill" style="background:${l.color}">${l.code}</span>`).join('')}</span>
-        </div>
-        <p>${p.description}</p>
-        <div class="stack-row">
-          ${p.stack.map(s => `<span class="stack-pill">${s}</span>`).join('')}
-        </div>
-        <div class="project-actions">
-          <a class="btn btn-sm btn-solid" href="${p.page}">View project</a>
-          <a class="btn btn-sm" href="${p.download}" download>Download</a>
-          ${p.code ? `<a class="btn btn-sm" href="${p.code}" download>Code</a>` : ''}
-        </div>
-      </div>
-    </article>
-  `).join('') + `
-    <article class="project-card ghost">
-      <div>
-        <h3>More coming soon</h3>
-        <p>New projects are on the way — check back later.</p>
-      </div>
-    </article>
-  `;
-}
-
-renderProjects(PROJECTS);
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
+  <script src="js/main.js"></script>
 </body>
+
 </html>

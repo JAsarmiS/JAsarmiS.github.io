@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="500" height="600" role="img" aria-label="Foto de perfil pendiente">
+  <rect width="500" height="600" fill="#FFE6DB"/>
+  <circle cx="250" cy="230" r="95" fill="#FFD200"/>
+  <path d="M75 600 C75 430 175 360 250 360 C325 360 425 430 425 600 Z" fill="#FFD200"/>
+  <text x="250" y="560" text-anchor="middle" font-family="Poppins, Roboto, sans-serif"
+        font-size="20" fill="#E45447">replace with your photo</text>
+</svg>

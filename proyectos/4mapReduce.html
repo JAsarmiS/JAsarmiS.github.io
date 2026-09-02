@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Pipeline with PySpark — Javier Sarmiento</title>
+  <meta name="description" content="Distributed data processing with PySpark and BigQuery.">
+
+  <!-- applies the saved theme before the first paint, so there is no flash -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <!-- ===== Header (paths go up one level with ../) ===== -->
+  <header class="header_area">
+    <div class="main_menu">
+      <nav class="container navbar">
+        <a class="navbar-brand" href="../index.html">Javier<span>.</span></a>
+
+        <ul class="menu_nav">
+          <li class="nav-item active"><a class="nav-link" href="../index.html#work">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#abt-me">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#contact-me">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path>
+            </svg>
+          </button>
+
+          <button class="navbar-toggler" type="button" aria-label="Open menu" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Project cover ===== -->
+  <section class="project_hero">
+    <div class="container container--narrow">
+      <a class="back_link" href="../index.html#work">&larr; Back to projects</a>
+      <h1>Data Pipeline with PySpark</h1>
+      <ul class="project_tags">
+        <li>PySpark</li>
+        <li>BigQuery</li>
+      </ul>
+      <div class="project_cover_lg">
+        <img src="../img/pipeline-datos.svg" alt="Cover image for Data Pipeline with PySpark">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Content ===== -->
+  <section class="section_gap">
+    <div class="container container--narrow project_content">
+      <h2>The problem</h2>
+      <p>
+        Explain what the need was and why it was worth solving. Two or three
+        sentences is plenty.
+      </p>
+
+      <h2>What I built</h2>
+      <p>
+        Describe the solution: the architecture, the decisions you made and why.
+      </p>
+      <ul>
+        <li>First thing worth highlighting.</li>
+        <li>Second thing worth highlighting.</li>
+        <li>Third thing worth highlighting.</li>
+      </ul>
+
+      <h2>Outcome</h2>
+      <p>
+        Close with what it achieved and what you learned along the way.
+      </p>
+
+      <div class="project_links">
+        <a class="btn" href="#">View the code</a>
+        <a class="btn btn--ghost" href="#">Download the project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <footer class="section_gap footer_area" id="contact-me">
+    <div class="container">
+      <aside class="social_widget">
+        <h4>Let's talk</h4>
+        <p class="footer_lead">
+          I'm looking for data and machine learning roles in Switzerland.
+          If something here matches what you need, reach out.
+        </p>
+
+        <ul class="list">
+          <li>
+            <a href="https://www.linkedin.com/in/tu-usuario" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path>
+                <path d="M2.9 9.75h4.2v11.1H2.9z"></path>
+                <path d="M9.75 9.75h4.02v1.52h.06a4.42 4.42 0 0 1 3.96-2.05c4.23 0 5.01 2.66 5.01 6.12v5.51h-4.19v-4.89c0-1.17-.02-2.67-1.66-2.67-1.66 0-1.92 1.27-1.92 2.59v4.97H9.75z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:tu@correo.com" aria-label="Send me an email" title="Email">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M2.4 5.9c0-.9.7-1.6 1.6-1.6h16c.9 0 1.6.7 1.6 1.6v.3L12 12.3 2.4 6.2z"></path>
+                <path d="M2.4 8.4v9.7c0 .9.7 1.6 1.6 1.6h16c.9 0 1.6-.7 1.6-1.6V8.4l-9.1 5.8a1 1 0 0 1-1.1 0z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="../cv.pdf" download aria-label="Download my CV" title="Download CV">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M11 3h2v8.3l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 11.3z"></path>
+                <path d="M4 15.5h2v3.1h12v-3.1h2v4.1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <div class="copyright">
+        <p>&copy; 2026 Javier Sarmiento Sanjuán</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
