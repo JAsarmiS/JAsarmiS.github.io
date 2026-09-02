@@ -4,10 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data Pipeline with PySpark — Javier Sarmiento</title>
-  <meta name="description" content="Distributed data processing with PySpark and BigQuery.">
+  <title>MapReduce Sports Analytics Engine</title>
+  <meta name="description" content="An end-to-end Mask R-CNN implementation in PyTorch over COCO.">
 
-  <!-- applies the saved theme before the first paint, so there is no flash -->
   <script>
     (function () {
       try {
@@ -29,8 +28,6 @@
 </head>
 
 <body>
-
-  <!-- ===== Header (paths go up one level with ../) ===== -->
   <header class="header_area">
     <div class="main_menu">
       <nav class="container navbar">
@@ -63,53 +60,49 @@
     </div>
   </header>
 
-  <!-- ===== Project cover ===== -->
   <section class="project_hero">
     <div class="container container--narrow">
       <a class="back_link" href="../index.html#work">&larr; Back to projects</a>
-      <h1>Data Pipeline with PySpark</h1>
+      <h1>MapReduce Sports Analytics Engine</h1>
       <ul class="project_tags">
-        <li>PySpark</li>
-        <li>BigQuery</li>
+        <li>Python, MapReduce, Hadoop</li>
+        <li>Big Data Processing</li>
+        <li>2026</li>
+        <li>EN, ES</li>
       </ul>
       <div class="project_cover_lg">
-        <img src="../img/pipeline-datos.svg" alt="Cover image for Data Pipeline with PySpark">
+        <img src="../img/mapReducePortada.jpeg">
       </div>
     </div>
   </section>
 
-  <!-- ===== Content ===== -->
   <section class="section_gap">
     <div class="container container--narrow project_content">
       <h2>The problem</h2>
-      <p>
-        Explain what the need was and why it was worth solving. Two or three
-        sentences is plenty.
+      <p> 
+        Sports organizations generate enormous volumes of match data (scores, player statistics, geographic information) across seasons and multiple leagues. Traditional databases struggle with datasets this large because they require sequential processing. The challenge is not collecting the data but extracting meaningful patterns from it efficiently: Which teams score the most goals at home? Which teams accumulate the most points? How do team behaviors differ between home and away matches? These questions demand a distributed processing framework that can slice through millions of match records without bottlenecking.
       </p>
 
       <h2>What I built</h2>
       <p>
-        Describe the solution: the architecture, the decisions you made and why.
+        A multi-stage MapReduce pipeline that processes Spanish football data across three independent jobs. The first extracts total team points by parsing match results and applying league rules (3 points for a win, 1 for a draw, 0 for a loss) and accumulates them across all matches. The second calculates average goals scored per team when playing at home versus away, a metric that reveals whether teams benefit from home-field advantage. Each job follows the MapReduce pattern: mappers parse raw CSV records and emit key-value pairs, combiners perform partial aggregation on each machine to reduce network overhead, and reducers finalize the calculations. The pipeline demonstrates how to structure data processing jobs for scalability and how to handle real-world messiness including irregular data formats, missing values, and misaligned team names.
       </p>
-      <ul>
-        <li>First thing worth highlighting.</li>
-        <li>Second thing worth highlighting.</li>
-        <li>Third thing worth highlighting.</li>
-      </ul>
 
       <h2>Outcome</h2>
       <p>
-        Close with what it achieved and what you learned along the way.
+        A working understanding of MapReduce and how to decompose data problems into map and reduce phases. The output ranks teams by accumulated points (Barcelona 1965 points, Real Madrid 1959) and reveals home-field advantage patterns, with teams consistently scoring more goals at home than away. More importantly, I learned how to design jobs that scale: once the mappers and reducers work correctly, the same code runs on datasets 100 times larger without modification. This is foundational infrastructure for any large-scale data processing.
       </p>
-
+      <!--para poner una foto
+      <div >
+        <img src="../img/airportClustering3.png">
+      </div>
+      -->
       <div class="project_links">
-        <a class="btn" href="#">View the code</a>
-        <a class="btn btn--ghost" href="#">Download the project</a>
+        <a class="btn" href="../proyectos/descargas/mapReduce.zip">Download the project</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
   <footer class="section_gap footer_area" id="contact-me">
     <div class="container">
       <aside class="social_widget">
@@ -121,7 +114,7 @@
 
         <ul class="list">
           <li>
-            <a href="https://www.linkedin.com/in/tu-usuario" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/javier-sarmiento-sanju%C3%A1n-60483727b/" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path>
                 <path d="M2.9 9.75h4.2v11.1H2.9z"></path>
@@ -130,7 +123,7 @@
             </a>
           </li>
           <li>
-            <a href="mailto:tu@correo.com" aria-label="Send me an email" title="Email">
+            <a href="mailto:javiersarmientosj@gmail.com" aria-label="Send me an email" title="Email">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M2.4 5.9c0-.9.7-1.6 1.6-1.6h16c.9 0 1.6.7 1.6 1.6v.3L12 12.3 2.4 6.2z"></path>
                 <path d="M2.4 8.4v9.7c0 .9.7 1.6 1.6 1.6h16c.9 0 1.6-.7 1.6-1.6V8.4l-9.1 5.8a1 1 0 0 1-1.1 0z"></path>
@@ -138,7 +131,7 @@
             </a>
           </li>
           <li>
-            <a href="../cv.pdf" download aria-label="Download my CV" title="Download CV">
+            <a href="../info/JavierSarmiento_CV_ch.pdf" download aria-label="Download my CV" title="Download CV">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M11 3h2v8.3l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 11.3z"></path>
                 <path d="M4 15.5h2v3.1h12v-3.1h2v4.1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"></path>
