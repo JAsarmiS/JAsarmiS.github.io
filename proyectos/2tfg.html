@@ -4,10 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Master's Thesis — Javier Sarmiento</title>
-  <meta name="description" content="Master's thesis in Big Data and Data Science.">
+  <title>Multimedia Metadata Extraction (Bachelor's Thesis)</title>
+  <meta name="description" content="An end-to-end Mask R-CNN implementation in PyTorch over COCO.">
 
-  <!-- applies the saved theme before the first paint, so there is no flash -->
   <script>
     (function () {
       try {
@@ -29,8 +28,6 @@
 </head>
 
 <body>
-
-  <!-- ===== Header (paths go up one level with ../) ===== -->
   <header class="header_area">
     <div class="main_menu">
       <nav class="container navbar">
@@ -63,65 +60,61 @@
     </div>
   </header>
 
-  <!-- ===== Project cover ===== -->
   <section class="project_hero">
     <div class="container container--narrow">
       <a class="back_link" href="../index.html#work">&larr; Back to projects</a>
-      <h1>Master's Thesis</h1>
+      <h1>Multimedia Metadata Extraction (Bachelor's Thesis)</h1>
       <ul class="project_tags">
-        <li>VIU</li>
-        <li>2026</li>
+        <li>Swift, EXIF, IPTC, XMP</li>
+        <li>Software Development</li>
+        <li>2024</li>
+        <li>ES</li>
       </ul>
       <div class="project_cover_lg">
-        <img src="../img/tfm-big-data.svg" alt="Cover image for Master's Thesis">
+        <img src="../img/tfgPortada.jpeg">
       </div>
     </div>
   </section>
 
-  <!-- ===== Content ===== -->
   <section class="section_gap">
     <div class="container container--narrow project_content">
       <h2>The problem</h2>
-      <p>
-        Explain what the need was and why it was worth solving. Two or three
-        sentences is plenty.
+      <p> 
+        Digital files carry metadata that tells their story: camera settings in photos, artist names in audio, compression levels in videos. Yet accessing this information requires juggling different formats and standards. EXIF for images, ID3 for audio, MP4 atoms for video, each with its own rules and quirks. Users need a unified way to view and analyze metadata across file types and understand what information is actually embedded in their multimedia library.
       </p>
 
       <h2>What I built</h2>
       <p>
-        Describe the solution: the architecture, the decisions you made and why.
+        A Swift application that reads multimedia files in multiple formats and extracts their embedded metadata consistently. The tool identifies and processes EXIF data from images, ID3 and other audio tags from sound files, and MP4 and MOV metadata from videos. The implementation covers the most relevant metadata standards (EXIF, IPTC, XMP) and includes two practical use cases: one for bulk metadata analysis and another for targeted metadata inspection. The application validates extraction accuracy and performance through test cases covering common file formats and edge cases, demonstrating how to parse binary metadata structures and present them in a usable interface.
       </p>
-      <ul>
-        <li>First thing worth highlighting.</li>
-        <li>Second thing worth highlighting.</li>
-        <li>Third thing worth highlighting.</li>
-      </ul>
 
       <h2>Outcome</h2>
       <p>
-        Close with what it achieved and what you learned along the way.
+        A portfolio piece that demonstrates understanding of multimedia formats and binary file parsing. The project shows how standards like EXIF, IPTC, and XMP work in practice, how to integrate with iOS frameworks for metadata access, and how to design an application that handles real-world messiness: files with missing tags, non-standard encodings, and incomplete metadata. Two working use cases prove the tool solves practical problems. For future work, expanding language support and adding metadata editing capabilities would make the tool production-ready.
       </p>
-
+      <!--para poner una foto
+      <div >
+        <img src="../img/airportClustering3.png">
+      </div>
+      -->
       <div class="project_links">
-        <a class="btn" href="#">View the code</a>
-        <a class="btn btn--ghost" href="#">Download the project</a>
+        <a class="btn" href="../proyectos/descargas/tfg.pdf">Download the project</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
   <footer class="section_gap footer_area" id="contact-me">
     <div class="container">
       <aside class="social_widget">
         <h4>Let's talk</h4>
         <p class="footer_lead">
-          I'm looking for data and machine learning roles in Switzerland.
-          If something here matches what you need, reach out.
+          I'm interested in problems where the hard part is figuring out what
+          the data actually says. If that sounds like your world, reach out.
         </p>
 
         <ul class="list">
           <li>
-            <a href="https://www.linkedin.com/in/tu-usuario" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/javier-sarmiento-sanju%C3%A1n-60483727b/" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path>
                 <path d="M2.9 9.75h4.2v11.1H2.9z"></path>
@@ -130,7 +123,7 @@
             </a>
           </li>
           <li>
-            <a href="mailto:tu@correo.com" aria-label="Send me an email" title="Email">
+            <a href="mailto:javiersarmientosj@gmail.com" aria-label="Send me an email" title="Email">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M2.4 5.9c0-.9.7-1.6 1.6-1.6h16c.9 0 1.6.7 1.6 1.6v.3L12 12.3 2.4 6.2z"></path>
                 <path d="M2.4 8.4v9.7c0 .9.7 1.6 1.6 1.6h16c.9 0 1.6-.7 1.6-1.6V8.4l-9.1 5.8a1 1 0 0 1-1.1 0z"></path>
@@ -138,7 +131,7 @@
             </a>
           </li>
           <li>
-            <a href="../cv.pdf" download aria-label="Download my CV" title="Download CV">
+            <a href="../info/JavierSarmiento_CV_ch.pdf" download aria-label="Download my CV" title="Download CV">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M11 3h2v8.3l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 11.3z"></path>
                 <path d="M4 15.5h2v3.1h12v-3.1h2v4.1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"></path>

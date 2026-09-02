@@ -4,10 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sales Analytics Dashboard — Javier Sarmiento</title>
-  <meta name="description" content="A sales dashboard built in Power BI on top of SQL.">
+  <title>PySpark Transaction Analysis Pipeline</title>
+  <meta name="description" content="An end-to-end Mask R-CNN implementation in PyTorch over COCO.">
 
-  <!-- applies the saved theme before the first paint, so there is no flash -->
   <script>
     (function () {
       try {
@@ -29,8 +28,6 @@
 </head>
 
 <body>
-
-  <!-- ===== Header (paths go up one level with ../) ===== -->
   <header class="header_area">
     <div class="main_menu">
       <nav class="container navbar">
@@ -63,65 +60,61 @@
     </div>
   </header>
 
-  <!-- ===== Project cover ===== -->
   <section class="project_hero">
     <div class="container container--narrow">
       <a class="back_link" href="../index.html#work">&larr; Back to projects</a>
-      <h1>Sales Analytics Dashboard</h1>
+      <h1>PySpark Transaction Analysis Pipeline</h1>
       <ul class="project_tags">
-        <li>Power BI</li>
-        <li>SQL</li>
+        <li>Python, PySpark, Spark SQL</li>
+        <li>Big Data Processing</li>
+        <li>2026</li>
+        <li>EN, ES</li>
       </ul>
       <div class="project_cover_lg">
-        <img src="../img/dashboard-ventas.svg" alt="Cover image for Sales Analytics Dashboard">
+        <img src="../img/pySparkPortada.jpeg">
       </div>
     </div>
   </section>
 
-  <!-- ===== Content ===== -->
   <section class="section_gap">
     <div class="container container--narrow project_content">
       <h2>The problem</h2>
-      <p>
-        Explain what the need was and why it was worth solving. Two or three
-        sentences is plenty.
+      <p> 
+        Consumer data is scattered across transaction logs—each entry records who spent what, using which payment method, across multiple sources. Traditional tools struggle because the data is too large to load into memory, but the questions are simple: Which payment methods do people actually use? Which video categories attract the most viewers? How do spending patterns differ based on payment method and amount? These require aggregation across millions of records without overwhelming a single machine.
       </p>
 
       <h2>What I built</h2>
       <p>
-        Describe the solution: the architecture, the decisions you made and why.
+        A three-stage PySpark pipeline that analyzes consumer spending behavior. The first job filters out credit card transactions and aggregates spending by person using non-credit methods (Bizum, cash, etc.), revealing who avoids debt-based payments. The second finds the video category with the highest total views by parsing log files with multiple delimiters and summing views by category type. The third segments users based on credit card spending thresholds: those with purchases over 1500 versus those under, uncovering spending tier patterns. Each job demonstrates core PySpark patterns: map transformations for parsing, filter for conditional logic, reduceByKey for aggregation, and cache for reusing RDDs across operations.
       </p>
-      <ul>
-        <li>First thing worth highlighting.</li>
-        <li>Second thing worth highlighting.</li>
-        <li>Third thing worth highlighting.</li>
-      </ul>
 
       <h2>Outcome</h2>
       <p>
-        Close with what it achieved and what you learned along the way.
+        A practical understanding of PySpark's lazy evaluation model and how RDD transformations compose into efficient execution plans. The output segments users by behavior (credit vs non-credit spending, high-value vs low-value transactions) and identifies consumption trends (dominant video categories). More importantly, I learned how to think in terms of distributed transformations: instead of writing loops that process rows sequentially, you declare how data should flow through map and reduce stages, then let Spark decide how to parallelize it. This mental model transfers directly to larger datasets without code changes.
       </p>
-
+      <!--para poner una foto
+      <div >
+        <img src="../img/airportClustering3.png">
+      </div>
+      -->
       <div class="project_links">
-        <a class="btn" href="#">View the code</a>
-        <a class="btn btn--ghost" href="#">Download the project</a>
+        <a class="btn" href="../proyectos/descargas/pySpark.zip">Download the project</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
   <footer class="section_gap footer_area" id="contact-me">
     <div class="container">
       <aside class="social_widget">
         <h4>Let's talk</h4>
         <p class="footer_lead">
-          I'm looking for data and machine learning roles in Switzerland.
-          If something here matches what you need, reach out.
+          I'm interested in problems where the hard part is figuring out what
+          the data actually says. If that sounds like your world, reach out.
         </p>
 
         <ul class="list">
           <li>
-            <a href="https://www.linkedin.com/in/tu-usuario" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/javier-sarmiento-sanju%C3%A1n-60483727b/" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path>
                 <path d="M2.9 9.75h4.2v11.1H2.9z"></path>
@@ -130,7 +123,7 @@
             </a>
           </li>
           <li>
-            <a href="mailto:tu@correo.com" aria-label="Send me an email" title="Email">
+            <a href="mailto:javiersarmientosj@gmail.com" aria-label="Send me an email" title="Email">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M2.4 5.9c0-.9.7-1.6 1.6-1.6h16c.9 0 1.6.7 1.6 1.6v.3L12 12.3 2.4 6.2z"></path>
                 <path d="M2.4 8.4v9.7c0 .9.7 1.6 1.6 1.6h16c.9 0 1.6-.7 1.6-1.6V8.4l-9.1 5.8a1 1 0 0 1-1.1 0z"></path>
@@ -138,7 +131,7 @@
             </a>
           </li>
           <li>
-            <a href="../cv.pdf" download aria-label="Download my CV" title="Download CV">
+            <a href="../info/JavierSarmiento_CV_ch.pdf" download aria-label="Download my CV" title="Download CV">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M11 3h2v8.3l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 11.3z"></path>
                 <path d="M4 15.5h2v3.1h12v-3.1h2v4.1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"></path>
