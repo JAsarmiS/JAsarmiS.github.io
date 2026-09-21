@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wage and Health Insurance Modelling with Regression in R</title>
+  <meta name="description" content="An end-to-end Mask R-CNN implementation in PyTorch over COCO.">
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <header class="header_area">
+    <div class="main_menu">
+      <nav class="container navbar">
+        <a class="navbar-brand" href="../index.html">Javier<span>.</span></a>
+
+        <ul class="menu_nav">
+          <li class="nav-item active"><a class="nav-link" href="../index.html#work">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#abt-me">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../index.html#contact-me">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path>
+            </svg>
+          </button>
+
+          <button class="navbar-toggler" type="button" aria-label="Open menu" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="project_hero">
+    <div class="container container--narrow">
+      <a class="back_link" href="../index.html#work">&larr; Back to projects</a>
+      <h1>Wage and Health Insurance Modelling with Regression in R</h1>
+      <ul class="project_tags"> <!--caracteristicas-->
+        <li>R, RStudio, ggplot2, GGally, car, lmtest, sandwich, caret, pROC, ISLR2</li>
+        <li>Data Analysis</li>
+        <li>2026</li>
+        <li>EN</li>
+      </ul>
+      <div class="project_cover_lg">
+        <img src="/img/regressionPortada.png"> <!--imagen portada-->
+      </div>
+    </div>
+  </section>
+
+  <section class="section_gap">
+    <div class="container container--narrow project_content">
+      <h2>The problem</h2>
+      <p> 
+        Wages reflect how the labour market values education, age and occupation. In the United States they also shape access to health insurance, since coverage is mostly provided by employers. The goal was to answer two questions with the same dataset: which factors drive wages and who is left without health insurance.
+
+The first is a continuous regression problem while the second is a binary classification problem, so the project required three families of models working on a single data source. The Wage dataset, with 3,000 male workers surveyed between 2003 and 2009, added two extra challenges: a strongly right-skewed wage distribution and a non-linear relationship between age and wage, plus an imbalanced insurance variable where only 30.6% of workers were uninsured.
+      </p>
+      <div >
+        <img src="../img/regression1.png">
+      </div>
+      <h2>What I built</h2>
+      <p>
+        I built a complete statistical analysis in R, covering data preparation, modelling, assumption checks and validation. I removed the constant region variable and the log wage column to avoid data leakage, then created a binary insurance variable for classification.
+
+For the age and wage relationship, I compared polynomial models of degrees 1 to 4 using nested F-tests, adjusted R² and AIC. The third-degree polynomial gave the best balance between fit and simplicity
+      </p>
+      <div >
+        <img src="../img/regression2.png">
+      </div>
+      <p>
+        Residual diagnostics revealed heteroscedasticity and non-normality, so I moved to a log-transformed response, which improved both assumptions and made coefficients readable as percentage changes.
+
+I then fitted a multiple linear model with stepwise AIC selection, checked multicollinearity with generalised VIFs, recalculated standard errors with the HC3 robust estimator and validated it on a 70/30 train/test split.
+
+Finally, I modelled the probability of having health insurance with logistic regression, using a stratified split, AIC selection and odds ratios. I evaluated it with confusion matrices, the ROC curve and an optimal threshold based on Youden's index.
+      </p>
+      <div >
+        <img src="../img/regression3.png">
+      </div>
+      <h2>Outcome</h2>
+      <p>
+        The multiple linear model explains 38.8% of wage variability and keeps an R² of 0.338 on unseen data, which rules out overfitting. Education is the strongest wage driver: workers with an advanced degree earn 52.9% more than those who did not finish high school (Imagen 4). Wages peak at around age 47.
+      </p>
+      <div >
+        <img src="../img/regression4.png">
+      </div>
+      <p>
+        The logistic model reaches an AUC of 0.752. With the default 0.5 threshold it detected only 36% of uninsured workers. Adjusting the threshold with Youden's index raised specificity to 72% and balanced accuracy from 64.6% to 69.3%, showing why accuracy alone is misleading when classes are imbalanced.
+      </p>
+      <!--para poner una foto
+      <div >
+        <img src="../img/airportClustering3.png">
+      </div>
+      -->
+      <div class="project_links">
+        <a class="btn" href="/proyectos/descargas/AG1_Sarmiento_Sanjuan_JavierEN">Download the project</a> <!--archivo a descargar-->
+      </div>
+    </div>
+  </section>
+
+  <footer class="section_gap footer_area" id="contact-me">
+    <div class="container">
+      <aside class="social_widget">
+        <h4>Let's talk</h4>
+        <p class="footer_lead">
+          I'm interested in problems where the hard part is figuring out what
+          the data actually says. If that sounds like your world, reach out.
+        </p>
+
+        <ul class="list">
+          <li>
+            <a href="https://www.linkedin.com/in/javier-sarmiento-sanju%C3%A1n-60483727b/" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path>
+                <path d="M2.9 9.75h4.2v11.1H2.9z"></path>
+                <path d="M9.75 9.75h4.02v1.52h.06a4.42 4.42 0 0 1 3.96-2.05c4.23 0 5.01 2.66 5.01 6.12v5.51h-4.19v-4.89c0-1.17-.02-2.67-1.66-2.67-1.66 0-1.92 1.27-1.92 2.59v4.97H9.75z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:javiersarmientosj@gmail.com" aria-label="Send me an email" title="Email">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M2.4 5.9c0-.9.7-1.6 1.6-1.6h16c.9 0 1.6.7 1.6 1.6v.3L12 12.3 2.4 6.2z"></path>
+                <path d="M2.4 8.4v9.7c0 .9.7 1.6 1.6 1.6h16c.9 0 1.6-.7 1.6-1.6V8.4l-9.1 5.8a1 1 0 0 1-1.1 0z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="../info/JavierSarmiento_CV_ch.pdf" download aria-label="Download my CV" title="Download CV">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M11 3h2v8.3l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 11.3z"></path>
+                <path d="M4 15.5h2v3.1h12v-3.1h2v4.1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <div class="copyright">
+        <p>&copy; 2026 Javier Sarmiento Sanjuán</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
