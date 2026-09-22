@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wage and Health Insurance Modelling with Regression in R</title>
+  <title>Forecasting Zurich's NO₂ Pollution with SARIMA in R</title>
   <meta name="description" content="An end-to-end Mask R-CNN implementation in PyTorch over COCO.">
 
   <script>
@@ -63,15 +63,15 @@
   <section class="project_hero">
     <div class="container container--narrow">
       <a class="back_link" href="../index.html#work">&larr; Back to projects</a>
-      <h1>Wage and Health Insurance Modelling with Regression in R</h1>
+      <h1>Forecasting Zurich's NO₂ Pollution with SARIMA in R</h1>
       <ul class="project_tags"> <!--caracteristicas-->
-        <li>R, RStudio, ggplot2, GGally, car, lmtest, sandwich, caret, pROC, ISLR2</li>
-        <li>Data Analysis</li>
+        <li>R, RStudio, forecast, tseries, dplyr, lubridate, ggplot2</li>
+        <li>Statistical Modelling</li>
         <li>2026</li>
-        <li>EN</li>
+        <li>EN></li>
       </ul>
       <div class="project_cover_lg">
-        <img src="../img/regressionPortada.png"> <!--imagen portada-->
+        <img src="../img/forecastingPortada.png">
       </div>
     </div>
   </section>
@@ -80,49 +80,46 @@
     <div class="container container--narrow project_content">
       <h2>The problem</h2>
       <p> 
-        Wages reflect how the labour market values education, age and occupation. In the United States they also shape access to health insurance, since coverage is mostly provided by employers. The goal was to answer two questions with the same dataset: which factors drive wages and who is left without health insurance.
+        Nitrogen dioxide comes mainly from road traffic and long exposure harms the respiratory system. Swiss law sets limit values that authorities must monitor continuously, so knowing whether pollution keeps falling and which months carry the highest risk is directly useful for air quality policy.
 
-The first is a continuous regression problem while the second is a binary classification problem, so the project required three families of models working on a single data source. The Wage dataset, with 3,000 male workers surveyed between 2003 and 2009, added two extra challenges: a strongly right-skewed wage distribution and a non-linear relationship between age and wage, plus an imbalanced insurance variable where only 30.6% of workers were uninsured.
+The City of Zurich publishes daily air quality measurements as open data, but in a raw long format: 179,450 records mixing four stations and eleven pollutants. Once isolated, the NO₂ series combines a falling trend, a strong annual cycle driven by winter temperature inversions and irregular weather effects. On top of that, the size of the seasonal swings shrinks as the pollution level drops, which rules out the simplest modelling approaches.
       </p>
       <div >
-        <img src="../img/regression1.png">
+        <img src="../img/forecasting1.png">
       </div>
+
       <h2>What I built</h2>
       <p>
-        I built a complete statistical analysis in R, covering data preparation, modelling, assumption checks and validation. I removed the constant region variable and the log wage column to avoid data leakage, then created a binary insurance variable for classification.
-
-For the age and wage relationship, I compared polynomial models of degrees 1 to 4 using nested F-tests, adjusted R² and AIC. The third-degree polynomial gave the best balance between fit and simplicity
+        I built an end-to-end time series pipeline in R. It downloads 16 years of annual CSV files directly from Zurich's open data portal, filters NO₂ at the Stampfenbachstrasse station and runs quality checks on the 5,844 daily values. I then aggregated them into 192 monthly averages to filter out short-term weather noise while keeping the seasonal pattern.
       </p>
       <div >
-        <img src="../img/regression2.png">
+        <img src="../img/forecasting2.png">
+      </div>
+
+      <p>
+A correlation of 0.883 between yearly level and variability confirmed that seasonality acts as a percentage of the level, so I applied a multiplicative decomposition to separate trend, seasonality and noise. After a log transformation, ADF and KPSS tests guided one regular and one seasonal difference to make the series stationary.
+      </p>
+      <div >
+        <img src="../img/forecasting3.png">
       </div>
       <p>
-        Residual diagnostics revealed heteroscedasticity and non-normality, so I moved to a log-transformed response, which improved both assumptions and made coefficients readable as percentage changes.
-
-I then fitted a multiple linear model with stepwise AIC selection, checked multicollinearity with generalised VIFs, recalculated standard errors with the HC3 robust estimator and validated it on a 70/30 train/test split.
-
-Finally, I modelled the probability of having health insurance with logistic regression, using a stratified split, AIC selection and odds ratios. I evaluated it with confusion matrices, the ROC curve and an optimal threshold based on Youden's index.
+        I identified the model orders manually from the ACF and PACF, which pointed to an ARIMA(0,1,1)(0,1,1)[12], known as the airline model. I trained it on 2010 to 2023 and benchmarked it against two variants, auto.arima and Holt-Winters on the 24 months of 2024 and 2025. Residuals were checked with the Ljung-Box test before refitting the final model on the full series to forecast 2026.
       </p>
-      <div >
-        <img src="../img/regression3.png">
-      </div>
+
       <h2>Outcome</h2>
       <p>
-        The multiple linear model explains 38.8% of wage variability and keeps an R² of 0.338 on unseen data, which rules out overfitting. Education is the strongest wage driver: workers with an advanced degree earn 52.9% more than those who did not finish high school (Imagen 4). Wages peak at around age 47.
+        NO₂ at the station fell by 49.7% in 16 years, from 36.25 µg/m³ in 2010 to 18.22 in 2025, with the sharpest drop between 2017 and 2020. Winter levels are almost double summer levels: February sits 31% above the trend while July sits 30% below.
+
+The manually identified model beat every alternative on unseen data, with an RMSE of 2.647 µg/m³ and a MAPE of 3.95%, against 2.987 for auto.arima and 3.024 for Holt-Winters. It did so with two parameters instead of five, showing that careful analysis can outperform automatic selection. Its residuals behave as white noise (p = 0.291).
+
+The 2026 forecast places the yearly average at 16.5 µg/m³, 9.5% below 2025, with a February peak of 21.9 and a July low of 11.3
       </p>
       <div >
-        <img src="../img/regression4.png">
+        <img src="../img/forecasting4.png">
       </div>
-      <p>
-        The logistic model reaches an AUC of 0.752. With the default 0.5 threshold it detected only 36% of uninsured workers. Adjusting the threshold with Youden's index raised specificity to 72% and balanced accuracy from 64.6% to 69.3%, showing why accuracy alone is misleading when classes are imbalanced.
-      </p>
-      <!--para poner una foto
-      <div >
-        <img src="../img/airportClustering3.png">
-      </div>
-      -->
+
       <div class="project_links">
-        <a class="btn" href="/proyectos/descargas/AG1_Sarmiento_Sanjuan_JavierEN.pdf">Download the project</a> <!--archivo a descargar-->
+        <a class="btn" href="../proyectos/descargas/AG2_Sarmiento_Sanjuan_JavierEN.pdf">Download the project</a>
       </div>
     </div>
   </section>
